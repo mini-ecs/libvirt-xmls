@@ -1,28 +1,30 @@
-<domain type='qemu'>
-  <name>QEMU-fedora-i686</name>
+<domain type='kvm'>
+  <name>ubuntu</name>
   <uuid>c7a5fdbd-cdaf-9455-926a-d65c16db1809</uuid>
-  <memory>219200</memory>
-  <currentMemory>219200</currentMemory>
-  <vcpu>2</vcpu>
+  <memory unit="GiB">4</memory>
+  <currentMemor unit="GiB">4</currentMemor>
+  <vcpu>4</vcpu>
   <os>
     <type arch='x86_64' machine='pc'>hvm</type>
     <boot dev='hd'/>
+    <boot dev='cdrom'/>
   </os>
   <devices>
     <emulator>/usr/bin/qemu-system-x86_64</emulator>
     <disk type='file' device='cdrom'>
-      <source file='/home/user/boot.iso'/>
+      <source file='/home/fangaoyang/work/ubuntu-20.04.3-desktop-amd64.iso'/>
       <target dev='hdc'/>
       <readonly/>
     </disk>
     <disk type='file' device='disk'>
-      <source file='/home/fangaoyang/work/ubuntu.img'/>
+			<driver name="qemu" type="qcow2" />
+      <source file='/home/fangaoyang/work/desktop.qcow2'/>
       <target dev='hda'/>
     </disk>
     <interface type='network'>
       <source network='default'/>
     </interface>
-    <graphics type='vnc' port='-1'/>
+    <graphics type="vnc" port="-1" listen="0.0.0.0" passwd="123" keymap="en-us"/>
     <serial type="pty">
     	<target port="0" />
 		</serial>
