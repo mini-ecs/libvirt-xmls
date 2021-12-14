@@ -1,0 +1,46 @@
+<domain type='kvm'>
+  <name>win10</name>
+  <uuid>c7a5fdbd-cdaf-9455-926a-d65c16db1829</uuid>
+  <memory unit="GiB">8</memory>
+  <currentMemor unit="GiB">8</currentMemor>
+  <vcpu>8</vcpu>
+  <os>
+    <type arch='x86_64' machine='pc'>hvm</type>
+    <boot dev='hd'/>
+    <!-- <boot dev='cdrom'/> -->
+  </os>
+  <features>
+    <acpi/>
+    <apic/>
+    <hyperv>
+      <relaxed state='on'/>
+      <vapic state='on'/>
+      <spinlocks state='on' retries='8191'/>
+    </hyperv>
+    <vmport state='off'/>
+  </features>
+  <cpu mode='host-model' check='partial'/>
+  <devices>
+    <emulator>/usr/bin/qemu-system-x86_64</emulator>
+    <disk type='file' device='cdrom'>
+      <source file='/home/fangaoyang/work/windows10.iso'/>
+      <target dev='hdc'/>
+      <readonly/>
+    </disk>
+    <disk type='file' device='disk'>
+			<driver name="qemu" type="qcow2" />
+      <source file='/home/fangaoyang/work/win10.qcow2'/>
+      <target dev='hda'/>
+    </disk>
+    <interface type='network'>
+      <source network='default'/>
+    </interface>
+    <graphics type="vnc" port="-1" listen="0.0.0.0" passwd="123" keymap="en-us"/>
+    <serial type="pty">
+    	<target port="0" />
+		</serial>
+  	<console type="pty">
+   		<target type="serial" port="0" />
+  	</console>
+  </devices>
+</domain>
